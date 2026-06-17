@@ -1,0 +1,21 @@
+.flashcard-container {
+  display: flex;
+  justify-content: center;
+}
+.flashcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: auto;
+  aspect-ratio: 5/3;
+  background-color: bisque;
+}
+
+.front-card {
+  background-color: pink;
+}
+
+.back-card {
+  background-color: orange;
+}
