@@ -1,21 +1,61 @@
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+h2 {
+  width: 50vw;
+}
+
 .flashcard-container {
   display: flex;
   justify-content: center;
+  perspective: 1000px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
 .flashcard {
+  width: 40vw;
+  aspect-ratio: 5/3;
+  position: relative;
+  transition: transform 0.15s; 
+  transform-style: preserve-3d; 
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40vw;
-  height: auto;
-  aspect-ratio: 5/3;
-  background-color: bisque;
+  font-size: 1.5rem;
+  padding: 20px;
+  box-sizing: border-box; 
+  border-radius: 12px;
+  color: black;
 }
 
-.front-card {
+.hard {
   background-color: pink;
 }
 
+.easy {
+  background-color: lightgreen;
+}
+
+.medium {
+  background-color: peachpuff;
+}
+
 .back-card {
-  background-color: orange;
+  transform: rotateY(180deg);
 }
