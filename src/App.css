@@ -59,3 +59,27 @@ h2 {
 .back-card {
   transform: rotateY(180deg);
 }
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.guess-container {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Visual feedback classes */
+input.correct {
+  border: 3px solid #4CAF50; /* Green */
+  background-color: #e8f5e9;
+}
+
+input.incorrect {
+  border: 3px solid #f44336; /* Red */
+  background-color: #ffebee;
+}

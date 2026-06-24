@@ -28,15 +28,41 @@ function App() {
 
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
+  const [guess, setGuess] = useState('');
+  const [feedback, setFeedback] = useState(''); // will be 'correct', 'incorrect', or ''
+
   const flipCard = () => {
     setIsCardFlipped(!isCardFlipped);
   };
 
-  const nextCard = () => {
-    const randomIndex = Math.floor(Math.random() * flashcards.length);
-    setCurrentCardIndex(randomIndex);
-    
-    setIsCardFlipped(false);
+  const handleNextCard = () => {
+    if (currentCardIndex < flashcards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1);
+      setIsCardFlipped(false);
+      setGuess(''); // clear the input box
+      setFeedback(''); // clear the color feedback
+    }
+  };
+
+  const handlePrevCard = () => {
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+      setIsCardFlipped(false);
+      setGuess(''); // clear the input box
+      setFeedback(''); // clear the color feedback
+    }
+  };
+
+  const checkGuess = () => {
+    // Get the current answer and the user's guess, ignoring case and extra spaces
+    const currentAnswer = flashcards[currentCardIndex].answer.toLowerCase().trim();
+    const userGuess = guess.toLowerCase().trim();
+
+    if (userGuess === currentAnswer) {
+      setFeedback('correct');
+    } else {
+      setFeedback('incorrect');
+    }
   };
 
   return (
@@ -59,7 +85,35 @@ function App() {
 
         </div>
       </div>
-      <button onClick={nextCard}>Next ➔</button>
+      {/* Guess Form */}
+      <div className="guess-container">
+        <label htmlFor="guess">Guess the answer here: </label>
+        <input 
+          type="text" 
+          id="guess"
+          name="guess"
+          placeholder="Place your answer here..."
+          value={guess}
+          onChange={(e) => setGuess(e.target.value)}
+          className={feedback} /* This will apply 'correct' or 'incorrect' CSS class */
+        />
+        <button onClick={checkGuess}>Submit Guess</button>
+      </div>
+      {/* Navigation Buttons */}
+      <div className="nav-buttons">
+        <button 
+          onClick={handlePrevCard} 
+          disabled={currentCardIndex === 0}
+        >
+          ⬅ Back
+        </button>
+        <button 
+          onClick={handleNextCard} 
+          disabled={currentCardIndex === flashcards.length - 1}
+        >
+          Next ➡
+        </button>
+      </div>
     </main>
   );
 };
